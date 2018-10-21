@@ -1,0 +1,1295 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{DQ3\_Andrew}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Data Question 3}\label{data-question-3}
+
+\subsection{Exploring earthquake data}\label{exploring-earthquake-data}
+
+Nate Silver discusses the difficulty of predicting earthquakes in The
+Signal and the Noise, - Are there factors that make an earthquake more
+likely? - Are there factors that make an earthquake more deadly? - Where
+would you live if you wanted to eliminate the risk of experiencing an
+earthquake? - Where would you avoid living?
+
+    \subsection{Data cleaning tasks
+include:}\label{data-cleaning-tasks-include}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Replace empty strings with NaN
+\item
+  Remove the footnotes from the 'Other Source Deaths' column
+\item
+  Convert Magnitude to a numeric
+\item
+  Create a new column ('deaths') that evaluates the four total-death
+  columns ('PDE Total Deaths', 'Utsu Total Deaths', 'EM-DAT Total
+  Deaths', and 'Other Source Deaths') and populates the new column with
+  the highest value.
+\item
+  Explore the data in terms of when and where earthquakes occurred and
+  how severe they were (magnitude, deaths, secondary effects).
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{requests}
+         \PY{k+kn}{from} \PY{n+nn}{bs4} \PY{k}{import} \PY{n}{BeautifulSoup} \PY{k}{as} \PY{n}{BS}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{re}
+         \PY{k+kn}{import} \PY{n+nn}{requests}
+         \PY{k+kn}{import} \PY{n+nn}{folium}
+         \PY{k+kn}{import} \PY{n+nn}{geopandas} \PY{k}{as} \PY{n+nn}{gpd}
+         \PY{k+kn}{from} \PY{n+nn}{shapely}\PY{n+nn}{.}\PY{n+nn}{geometry} \PY{k}{import} \PY{n}{Point}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{folium}\PY{n+nn}{.}\PY{n+nn}{plugins} \PY{k}{import} \PY{n}{HeatMap}
+         
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{c+c1}{\PYZsh{} Increasing default figure size of the notebook}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{18}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c+c1}{\PYZsh{} URL for Wikipedia article with earthquake data table}
+         \PY{n}{url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://en.wikipedia.org/wiki/List\PYZus{}of\PYZus{}deadly\PYZus{}earthquakes\PYZus{}since\PYZus{}1900}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{} create a Request object for the wikipedia page for the Turing Award}
+         \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} read the resulting HTML into a variable called result\PYZus{}text}
+         \PY{n}{result\PYZus{}text} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{text}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} create the soup by constructing a BS object from the html page and the appropriate parser}
+         \PY{n}{soup} \PY{o}{=} \PY{n}{BS}\PY{p}{(}\PY{n}{result\PYZus{}text}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html.parser}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}soup}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{c+c1}{\PYZsh{} Find table from web page}
+         \PY{c+c1}{\PYZsh{} There is only one table on the wikipedia page}
+         \PY{n}{table} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{table}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{attrs} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sortable wikitable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}table}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{table}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{table\PYZus{}rows} \PY{o}{=} \PY{n}{table}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{findAll}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{table\PYZus{}rows}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{ind}\PY{p}{,} \PY{n}{tr} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{table\PYZus{}rows}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tag} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{td}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{ind} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{th}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{row} \PY{o}{=} \PY{p}{[}\PY{n}{elem}\PY{o}{.}\PY{n}{text} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{tr}\PY{o}{.}\PY{n}{findAll}\PY{p}{(}\PY{n}{tag}\PY{p}{)}\PY{p}{]}
+             \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+         \PY{n}{earthquakes\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{earthquakes\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:}        Origin (UTC) Present-day country and link to Wikipedia article     Lat  \textbackslash{}
+         0  1900-05-11 17:23                                             Japan  38.700   
+         1  1900-07-12 06:25                                            Turkey  40.300   
+         2  1900-10-29 09:11                                         Venezuela  11.000   
+         3  1901-02-15 00:00                                             China  26.000   
+         4  1901-03-31 07:11                                          Bulgaria  43.400   
+         
+               Long Depth (km) Magnitude Secondary Effects PDE Shaking Deaths  \textbackslash{}
+         0  141.100          5  7.0 MJMA                                        
+         1   43.100              5.9 Muk                                        
+         2  -66.000          0    7.7 Mw                                        
+         3  100.100          0    6.5 Ms                                        
+         4   28.700              6.4 Muk                                        
+         
+           PDE Total Deaths Utsu Total Deaths EM-DAT Total Deaths Other Source Deaths\textbackslash{}n  
+         0                                                                           \textbackslash{}n  
+         1                                140                                        \textbackslash{}n  
+         2                                                                           \textbackslash{}n  
+         3                                                                           \textbackslash{}n  
+         4                                  4                                        \textbackslash{}n  
+\end{Verbatim}
+            
+    \subsubsection{Secondary effects are reported, they are indicated by
+``T'', ``L'', ``F'' or
+``Lq''}\label{secondary-effects-are-reported-they-are-indicated-by-t-l-f-or-lq}
+
+T = Tsunami, L = Landslide, F = Fire, Lq = Liquefaction
+
+    PDE Totals are reported by United States Geological Survey's Preliminary
+Determination of Epicenters
+
+pde\_shaking = Deaths from shaking only
+
+pde\_total = total fatalities resulting from earthquake shaking and
+secondary effects, such as tsunami, landslide, fire, liquefaction or
+other factors (e.g., heart failure)
+
+utsu\_total = the total deaths resulting from an earthquake (up to date
+up to 2003)
+
+em\_dat\_total = records from the Emergency Events Database (Earthquake
+source parameters in the EM-DAT are often absent, incomplete, or
+erroneous. Consequently, several events may be missed in the automated
+catalog associations. Furthermore, where the impact of an earthquake
+spans political boundaries, database entries are often subdivided by
+country. For significant events, the observed fatalities are aggregated
+and manually associated.)
+
+other\_source = other sources of shaking deaths and indicates improved
+fatality estimates from official reports and detailed scholarly studies,
+where available
+
+    \subsection{1. Replace empty strings with
+NaN}\label{replace-empty-strings-with-nan}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} Replacing end lines with blank space}
+         \PY{n}{earthquakes\PYZus{}df} \PY{o}{=} \PY{n}{earthquakes\PYZus{}df}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Replacing empty values with NaN}
+         \PY{n}{earthquakes\PYZus{}df} \PY{o}{=} \PY{n}{earthquakes\PYZus{}df}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)}
+         \PY{n}{earthquakes\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:}        Origin (UTC) Present-day country and link to Wikipedia article     Lat  \textbackslash{}
+         0  1900-05-11 17:23                                             Japan  38.700   
+         1  1900-07-12 06:25                                            Turkey  40.300   
+         2  1900-10-29 09:11                                         Venezuela  11.000   
+         3  1901-02-15 00:00                                             China  26.000   
+         4  1901-03-31 07:11                                          Bulgaria  43.400   
+         
+               Long Depth (km) Magnitude Secondary Effects PDE Shaking Deaths  \textbackslash{}
+         0  141.100          5  7.0 MJMA               NaN                NaN   
+         1   43.100        NaN   5.9 Muk               NaN                NaN   
+         2  -66.000          0    7.7 Mw               NaN                NaN   
+         3  100.100          0    6.5 Ms               NaN                NaN   
+         4   28.700        NaN   6.4 Muk               NaN                NaN   
+         
+           PDE Total Deaths Utsu Total Deaths EM-DAT Total Deaths Other Source Deaths\textbackslash{}n  
+         0              NaN               NaN                 NaN                   NaN  
+         1              NaN               140                 NaN                   NaN  
+         2              NaN               NaN                 NaN                   NaN  
+         3              NaN               NaN                 NaN                   NaN  
+         4              NaN                 4                 NaN                   NaN  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c+c1}{\PYZsh{} Creating new DF for the clean data}
+         \PY{c+c1}{\PYZsh{} Changing columns to make them easier to call}
+         \PY{n}{clean\PYZus{}df} \PY{o}{=} \PY{n}{earthquakes\PYZus{}df}
+         \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{depth\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{secondary\PYZus{}effects}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pde\PYZus{}shaking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pde\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utsu\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{em\PYZus{}dat\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:}              origin    country     lat     long depth\_km magnitude  \textbackslash{}
+         0  1900-05-11 17:23      Japan  38.700  141.100        5  7.0 MJMA   
+         1  1900-07-12 06:25     Turkey  40.300   43.100      NaN   5.9 Muk   
+         2  1900-10-29 09:11  Venezuela  11.000  -66.000        0    7.7 Mw   
+         3  1901-02-15 00:00      China  26.000  100.100        0    6.5 Ms   
+         4  1901-03-31 07:11   Bulgaria  43.400   28.700      NaN   6.4 Muk   
+         
+           secondary\_effects pde\_shaking pde\_total utsu\_total em\_dat\_total other\_source  
+         0               NaN         NaN       NaN        NaN          NaN          NaN  
+         1               NaN         NaN       NaN        140          NaN          NaN  
+         2               NaN         NaN       NaN        NaN          NaN          NaN  
+         3               NaN         NaN       NaN        NaN          NaN          NaN  
+         4               NaN         NaN       NaN          4          NaN          NaN  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{} Cleaning up other\PYZus{}source column}
+         \PY{c+c1}{\PYZsh{} Removing \PYZbs{}n}
+         \PY{c+c1}{\PYZsh{} removing footnotes}
+         \PY{c+c1}{\PYZsh{} removing +}
+         \PY{c+c1}{\PYZsh{} removing parentheses}
+         \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{}= clean\PYZus{}df[\PYZsq{}other\PYZus{}source\PYZsq{}].str[:\PYZhy{}2]}
+         \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:}                 origin                                   country     lat  \textbackslash{}
+         1335  2011-03-11 14:46        Japan (see 2011 Tōhoku earthquake)  38.322   
+         1336  2011-03-24 20:25         Burma (see 2011 Burma earthquake)     NaN   
+         1337  2011-04-07 14:32  Japan (see April 2011 Miyagi earthquake)    38.2   
+         1338  2011-09-18 12:40        India (see 2011 Sikkim earthquake)  27.723   
+         1339  2011-09-23 10:41          Turkey (see 2011 Van earthquake)    38.6   
+         
+                  long depth\_km magnitude secondary\_effects pde\_shaking pde\_total  \textbackslash{}
+         1335  142.369     24.4    9.0 Mw                 T         NaN       NaN   
+         1336      NaN      NaN    6.8 Mw               NaN         NaN       NaN   
+         1337    140.0     66.0    7.1 Mw               NaN         NaN       NaN   
+         1338   88.064     19.7    6.9 Mw                 L         NaN       NaN   
+         1339     43.5      7.2    7.1 Mw               NaN         NaN       NaN   
+         
+              utsu\_total em\_dat\_total                  other\_source  
+         1335        NaN          NaN                     15894[20]  
+         1336        NaN          NaN                          150+  
+         1337        NaN          NaN                           NaN  
+         1338        NaN          NaN                          111+  
+         1339        NaN          NaN  601 (as of October 30, 2011)  
+\end{Verbatim}
+            
+    \section{2. Remove the footnotes from the 'Other Source Deaths'
+column}\label{remove-the-footnotes-from-the-other-source-deaths-column}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{df\PYZus{}str} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{row}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{df\PYZus{}str}\PY{p}{)} \PY{o}{==} \PY{n+nb}{str}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{df\PYZus{}str}\PY{o}{.}\PY{n}{isdigit}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                     \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{row}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}str}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{k}{while} \PY{n}{df\PYZus{}str}\PY{p}{[}\PY{n}{count}\PY{p}{]}\PY{o}{.}\PY{n}{isdigit}\PY{p}{(}\PY{p}{)} \PY{o+ow}{or} \PY{n}{df\PYZus{}str}\PY{p}{[}\PY{n}{count}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                         \PY{k}{if} \PY{n}{count} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}str}\PY{p}{)}\PY{p}{:}
+                             \PY{k}{break}
+                     \PY{n}{df\PYZus{}str} \PY{o}{=} \PY{n}{df\PYZus{}str}\PY{p}{[}\PY{p}{:}\PY{n}{count}\PY{p}{]}
+                     \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{row}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}str}
+                 
+         \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:}                 origin                                         country  \textbackslash{}
+         1330  2010-03-08 02:32             Turkey (see 2010 Elâzığ earthquake)   
+         1331  2010-03-11 14:39           Chile (see 2010 Pichilemu earthquake)   
+         1332  2010-04-14 23:49               China (see 2010 Yushu earthquake)   
+         1333  2011-02-21 23:51  New Zealand (see 2011 Christchurch earthquake)   
+         1334  2011-03-10 04:58              China (see 2011 Yunnan earthquake)   
+         1335  2011-03-11 14:46              Japan (see 2011 Tōhoku earthquake)   
+         1336  2011-03-24 20:25               Burma (see 2011 Burma earthquake)   
+         1337  2011-04-07 14:32        Japan (see April 2011 Miyagi earthquake)   
+         1338  2011-09-18 12:40              India (see 2011 Sikkim earthquake)   
+         1339  2011-09-23 10:41                Turkey (see 2011 Van earthquake)   
+         
+                  lat     long depth\_km magnitude secondary\_effects pde\_shaking  \textbackslash{}
+         1330     NaN      NaN      NaN    6.1 Mw               NaN         NaN   
+         1331     NaN      NaN      NaN    6.9 Mw                 L         NaN   
+         1332     NaN      NaN      NaN    6.9 Mw                 L         NaN   
+         1333     NaN      NaN      NaN    6.3 Mw                Lq         NaN   
+         1334     NaN      NaN      NaN    5.4 Mw               NaN         NaN   
+         1335  38.322  142.369     24.4    9.0 Mw                 T         NaN   
+         1336     NaN      NaN      NaN    6.8 Mw               NaN         NaN   
+         1337    38.2    140.0     66.0    7.1 Mw               NaN         NaN   
+         1338  27.723   88.064     19.7    6.9 Mw                 L         NaN   
+         1339    38.6     43.5      7.2    7.1 Mw               NaN         NaN   
+         
+              pde\_total utsu\_total em\_dat\_total other\_source  
+         1330       NaN        NaN          NaN           42  
+         1331       NaN        NaN          NaN            1  
+         1332       NaN        NaN          NaN        2,698  
+         1333       NaN        NaN          NaN          181  
+         1334       NaN        NaN          NaN          NaN  
+         1335       NaN        NaN          NaN        15894  
+         1336       NaN        NaN          NaN          150  
+         1337       NaN        NaN          NaN          NaN  
+         1338       NaN        NaN          NaN          111  
+         1339       NaN        NaN          NaN          601  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{regex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{to\PYZus{}replace}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{value}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}clean\PYZus{}df[\PYZsq{}other\PYZus{}source\PYZsq{}].unique()}
+\end{Verbatim}
+
+
+    \subsection{3. Convert Magnitude to a
+numeric}\label{convert-magnitude-to-a-numeric}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{magnitude} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{magnitude}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5 ML}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5.0 ML}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}correction for non\PYZhy{}decimal entry}
+         \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{magnitude} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{magnitude}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{magnitude}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}clean\PYZus{}df[\PYZsq{}magnitude\PYZsq{}].unique()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{c+c1}{\PYZsh{} Fixing bad entry that previously had ? in the magnitude}
+         \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{413}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{c+c1}{\PYZsh{} Converting relevant columns to numeric}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pde\PYZus{}shaking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pde\PYZus{}shaking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pde\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pde\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utsu\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utsu\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{em\PYZus{}dat\PYZus{}total} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{em\PYZus{}dat\PYZus{}total}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{em\PYZus{}dat\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{em\PYZus{}dat\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}clean\PYZus{}df.info()}
+\end{Verbatim}
+
+
+    \subsection{4. Create a new column ('deaths') that evaluates the four
+total-death columns ('PDE Total Deaths', 'Utsu Total Deaths', 'EM-DAT
+Total Deaths', and 'Other Source Deaths') and populates the new column
+with the highest
+value.}\label{create-a-new-column-deaths-that-evaluates-the-four-total-death-columns-pde-total-deaths-utsu-total-deaths-em-dat-total-deaths-and-other-source-deaths-and-populates-the-new-column-with-the-highest-value.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{c+c1}{\PYZsh{} New column with highest value from all the death columns}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pde\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utsu\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{em\PYZus{}dat\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}clean\PYZus{}df.head(10)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{c+c1}{\PYZsh{} Convert Origin to datetime}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}clean\PYZus{}df.head()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{c+c1}{\PYZsh{} Turning Latitude and Longitude to plottable points}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geometry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{Point}\PY{p}{(}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{long}\PY{p}{)}\PY{p}{,} \PY{n+nb}{float}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{lat}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}clean\PYZus{}df.head(10)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{c+c1}{\PYZsh{} Removing information in parentheses after the country names}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}  \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{(.*}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Strip whitespace because a whitespace is left at the end of strings when the parentheses are removed}
+         \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}  \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}clean\PYZus{}df.head(10)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{c+c1}{\PYZsh{} Grouping by country and counting to see the countries which have the most earthquakes}
+         \PY{n}{eq\PYZus{}count} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{eq\PYZus{}count} \PY{o}{=} \PY{n}{eq\PYZus{}count}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{eq\PYZus{}count}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{eq\PYZus{}count}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:}      country  count
+         0      China    166
+         1  Indonesia     96
+         2     Turkey     95
+         3       Iran     91
+         4      Japan     82
+         5       Peru     54
+         6     Taiwan     47
+         7     Mexico     46
+         8      Chile     44
+         9     Greece     44
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{c+c1}{\PYZsh{} Grouping by country and death\PYZus{}count to see the countries which have the most deaths}
+         \PY{n}{death\PYZus{}count} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{death\PYZus{}count} \PY{o}{=} \PY{n}{death\PYZus{}count}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{death\PYZus{}count}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{death\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{death\PYZus{}count}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}79}]:}         country  death\_count
+         0         China    1284382.0
+         1     Indonesia     343574.0
+         2         Haiti     222523.0
+         3         Japan     185148.0
+         4          Iran     177947.0
+         5      Pakistan     157852.0
+         6         Italy     125451.0
+         7        Turkey     123304.0
+         8  Turkmenistan     113711.0
+         9          Peru      74054.0
+\end{Verbatim}
+            
+    \subsubsection{China has the most deadly earthquakes since 1900, but
+it's also a very large country. It's followed by Indonesia which is a
+much smaller
+country}\label{china-has-the-most-deadly-earthquakes-since-1900-but-its-also-a-very-large-country.-its-followed-by-indonesia-which-is-a-much-smaller-country}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{c+c1}{\PYZsh{} Seeing how many deadly earthquakes the US had}
+         \PY{n}{eq\PYZus{}count}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{eq\PYZus{}count}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{United States}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:}           country  count
+         12  United States     34
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{c+c1}{\PYZsh{} Creating a new DF with a datetime index for date based analysis}
+         \PY{n}{eq\PYZus{}date\PYZus{}ind} \PY{o}{=} \PY{n}{clean\PYZus{}df}
+         \PY{n}{eq\PYZus{}date\PYZus{}ind} \PY{o}{=} \PY{n}{eq\PYZus{}date\PYZus{}ind}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}eq\PYZus{}date\PYZus{}ind.info()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{c+c1}{\PYZsh{} Creating a new dataframe with the number of deadly earthquakes each year}
+         \PY{n}{eq\PYZus{}yearly} \PY{o}{=} \PY{n}{eq\PYZus{}date\PYZus{}ind}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{eq\PYZus{}yearly} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{eq\PYZus{}yearly}\PY{p}{)}
+         \PY{n}{eq\PYZus{}yearly}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}eq\PYZus{}yearly = eq\PYZus{}yearly.reset\PYZus{}index()}
+         \PY{n}{eq\PYZus{}yearly}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{eq\PYZus{}yearly}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}eq\PYZus{}yearly.head(15)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{freq} \PY{o}{=} \PY{n}{eq\PYZus{}yearly}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{freq}\PY{p}{)}
+         \PY{n}{dates} \PY{o}{=} \PY{n}{freq}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{dates}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{dates}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Deadly Earthquakes From 1900 to 2011}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Occurrences}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{There appear to be more deadly earthquakes as time goes
+on}\label{there-appear-to-be-more-deadly-earthquakes-as-time-goes-on}
+
+\subsection{Could be due to advancements in technology and reporting
+deaths}\label{could-be-due-to-advancements-in-technology-and-reporting-deaths}
+
+    \subsection{Examine earthquakes by month to see if that yields anything
+interesting}\label{examine-earthquakes-by-month-to-see-if-that-yields-anything-interesting}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{c+c1}{\PYZsh{} Creating a new dataframe with the number of deadly earthquakes each year}
+         \PY{n}{eq\PYZus{}monthly} \PY{o}{=} \PY{n}{eq\PYZus{}date\PYZus{}ind}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{eq\PYZus{}monthly} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{eq\PYZus{}monthly}\PY{p}{)}
+         \PY{n}{eq\PYZus{}monthly}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{eq\PYZus{}monthly} \PY{o}{=} \PY{n}{eq\PYZus{}monthly}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{eq\PYZus{}monthly}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{eq\PYZus{}monthly}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{eq\PYZus{}monthly}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{eq\PYZus{}monthly}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{month}\PY{p}{)}
+         \PY{n}{eq\PYZus{}monthly}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:}    origin  count
+         0       5      1
+         1       6      0
+         2       7      1
+         3       8      0
+         4       9      0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{eq\PYZus{}month\PYZus{}total} \PY{o}{=} \PY{n}{eq\PYZus{}monthly}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}month\PYZus{}list = [\PYZsq{}Jan\PYZsq{}, \PYZsq{}Feb\PYZsq{}, \PYZsq{}Mar\PYZsq{}, \PYZsq{}Apr\PYZsq{}, \PYZsq{}May\PYZsq{}, \PYZsq{}Jun\PYZsq{}, \PYZsq{}Jul\PYZsq{}, \PYZsq{}Aug\PYZsq{}, \PYZsq{}Sep\PYZsq{}, \PYZsq{}Oct\PYZsq{}, \PYZsq{}Nov\PYZsq{}, \PYZsq{}Dec\PYZsq{}]}
+         \PY{n}{eq\PYZus{}month\PYZus{}total} \PY{o}{=} \PY{n}{eq\PYZus{}month\PYZus{}total}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{eq\PYZus{}month\PYZus{}total} \PY{o}{=} \PY{n}{eq\PYZus{}month\PYZus{}total}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}eq\PYZus{}month\PYZus{}total[\PYZsq{}origin\PYZsq{}] = month\PYZus{}list}
+         \PY{c+c1}{\PYZsh{}eq\PYZus{}month\PYZus{}total}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{eq\PYZus{}month\PYZus{}total}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{month\PYZus{}ticks} \PY{o}{=} \PY{n}{eq\PYZus{}month\PYZus{}total}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}
+         \PY{n}{month\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Apr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{May}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jun}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jul}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Aug}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sep}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oct}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{month\PYZus{}ticks}\PY{p}{,} \PY{n}{month\PYZus{}list}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency of Deadly Earthquakes in Each Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Occurrences}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{The earthquakes seem to be pretty evenly distributed over
+the months of the
+year}\label{the-earthquakes-seem-to-be-pretty-evenly-distributed-over-the-months-of-the-year}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{countries} \PY{o}{=} \PY{n}{gpd}\PY{o}{.}\PY{n}{read\PYZus{}file}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/country\PYZus{}borders.geojson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{countries}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}87}]:}    scalerank  labelrank   sovereignt sov\_a3  adm0\_dif  level  \textbackslash{}
+         0          1          3  Afghanistan    AFG         0      2   
+         
+                         type        admin adm0\_a3  geou\_dif  \textbackslash{}
+         0  Sovereign country  Afghanistan     AFG         0   
+         
+                                  {\ldots}                         region\_un      subregion  \textbackslash{}
+         0                        {\ldots}                              Asia  Southern Asia   
+         
+             region\_wb name\_len long\_len  abbrev\_len tiny homepart     featureclass  \textbackslash{}
+         0  South Asia       11       11           4  -99        1  Admin-0 country   
+         
+                                                     geometry  
+         0  POLYGON ((61.21081709172574 35.65007233330923,{\ldots}  
+         
+         [1 rows x 64 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{plate\PYZus{}bounds} \PY{o}{=} \PY{n}{gpd}\PY{o}{.}\PY{n}{read\PYZus{}file}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/tectonic\PYZus{}boundaries.geojson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plate\PYZus{}bounds}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:}    cartodb\_id type plateb platea                source   name           layer  \textbackslash{}
+         0           4          AN     SO  Lemaux et al. [2002]  SO-AN  plate boundary   
+         
+                                                     geometry  
+         0  (LINESTRING (32.1258 -46.9998, 33.1739 -47.264{\ldots}  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{c+c1}{\PYZsh{} Creating a DF to map the points}
+         \PY{c+c1}{\PYZsh{} Dropping the rows with NaN for Lat and Long}
+         \PY{n}{map\PYZus{}df} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}map\PYZus{}df.info()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{c+c1}{\PYZsh{} GeoDataFrame of Clean DF}
+         \PY{n}{clean\PYZus{}geo} \PY{o}{=} \PY{n}{gpd}\PY{o}{.}\PY{n}{GeoDataFrame}\PY{p}{(}\PY{n}{map\PYZus{}df}\PY{p}{,} \PY{n}{crs} \PY{o}{=} \PY{n}{plate\PYZus{}bounds}\PY{o}{.}\PY{n}{crs}\PY{p}{,} \PY{n}{geometry} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geometry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{c+c1}{\PYZsh{}create our map of the world and show it}
+         \PY{n}{map\PYZus{}world} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zoom\PYZus{}start} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}draw our plate boundaries: plate\PYZus{}bounds}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{GeoJson}\PY{p}{(}\PY{n}{plate\PYZus{}bounds}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}world}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}iterate through our urban art to create locations and markers for each piece}
+         \PY{c+c1}{\PYZsh{}here lat is listed first!!}
+         \PY{c+c1}{\PYZsh{}also the apostrophe in the 4th row causes problems!}
+         
+         \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{map\PYZus{}df}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{row\PYZus{}values} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} 
+             \PY{n}{location} \PY{o}{=} \PY{p}{[}\PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+             \PY{n}{popup} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}br/\PYZgt{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}br/\PYZgt{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Magnitude: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}br/\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deaths: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{mag\PYZus{}radius} \PY{o}{=} \PY{l+m+mf}{4.6} \PY{o}{*}\PY{o}{*} \PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} 
+             \PY{c+c1}{\PYZsh{}mag\PYZus{}radius = row\PYZus{}values[\PYZsq{}magnitude\PYZsq{}] ** 6.2}
+             \PY{n}{death\PYZus{}radius} \PY{o}{=} \PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}  \PY{o}{*} \PY{l+m+mi}{5}
+             \PY{c+c1}{\PYZsh{}marker = folium.Marker(location = location, popup = popup)}
+             \PY{k}{if} \PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mf}{5.5}\PY{p}{:}
+                 \PY{n}{marker} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Circle}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{n}{location}\PY{p}{,} \PY{n}{popup}\PY{o}{=}\PY{n}{popup}\PY{p}{,} \PY{n}{radius}\PY{o}{=}\PY{n}{mag\PYZus{}radius}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crimson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crimson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}world}\PY{p}{)}
+                 \PY{n}{marker}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}world}\PY{p}{)}
+             \PY{k}{if} \PY{n}{row\PYZus{}values}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{8000}\PY{p}{:}
+                 \PY{n}{marker} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Circle}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{n}{location}\PY{p}{,} \PY{n}{popup}\PY{o}{=}\PY{n}{popup}\PY{p}{,} \PY{n}{radius}\PY{o}{=}\PY{n}{death\PYZus{}radius}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}world}\PY{p}{)}
+                 \PY{n}{marker}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}world}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Show map}
+         \PY{n}{map\PYZus{}world}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}91}]:} <folium.folium.Map at 0x12d894eb8>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{map\PYZus{}heat} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{zoom\PYZus{}start} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}draw our plate boundaries: plate\PYZus{}bounds}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{GeoJson}\PY{p}{(}\PY{n}{plate\PYZus{}bounds}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}heat}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Filter the DF for rows, then columns, then remove NaNs}
+         \PY{n}{heat\PYZus{}df} \PY{o}{=} \PY{n}{map\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Not necessary to remove NaNs because that was done earlier in the notebook}
+         \PY{c+c1}{\PYZsh{} List comprehension to make out list of lists}
+         \PY{n}{heat\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{heat\PYZus{}df}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Plot it on the map}
+         \PY{n}{HeatMap}\PY{p}{(}\PY{n}{heat\PYZus{}data}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}heat}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Display the map}
+         \PY{n}{map\PYZus{}heat}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:} <folium.folium.Map at 0x12d88cd30>
+\end{Verbatim}
+            
+    \subsection{Heat map shows the concentration of the deadly
+earthquakes}\label{heat-map-shows-the-concentration-of-the-deadly-earthquakes}
+
+\begin{verbatim}
+<li>The west coast of both South and North America is very active</li>
+<li>There is a strip of activity stretching from southern Europe across Southern Asia to the Pacific Ocean</li>
+<li>The island nations of Oceania have a high concentration</li>
+<ul>
+    <li>If we zoom in, we can see a higher resolution picture of what's going on</li>
+    <ul>
+        <li>Taiwan and Japan are almost totally covered</li>
+        <li>Indonesia has a high concentration of deadly earthquakes</li>
+    </ul>
+</ul>
+<li>Zooming in on Europe shows a high concentration in Greece and Italy</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{c+c1}{\PYZsh{}Finding the number of earthquakes above 9 magnitude}
+         \PY{n}{above\PYZus{}9} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{9}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}above\PYZus{}9.head(10)}
+\end{Verbatim}
+
+
+    \subsection{Only 5 deadly earthquakes magnitude 9 or above between 1900
+and
+2011}\label{only-5-deadly-earthquakes-magnitude-9-or-above-between-1900-and-2011}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{between\PYZus{}8\PYZus{}9} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}between\PYZus{}8\PYZus{}9 = between\PYZus{}8\PYZus{}9.loc[between\PYZus{}8\PYZus{}9[\PYZsq{}magnitude\PYZsq{}]\PYZlt{}9]}
+         \PY{n}{between\PYZus{}8\PYZus{}9}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}94}]:} (51, 14)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{c+c1}{\PYZsh{} Grouping by country and counting to see the countries which have the most earthquakes}
+         \PY{n}{maj\PYZus{}count} \PY{o}{=} \PY{n}{between\PYZus{}8\PYZus{}9}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{maj\PYZus{}count} \PY{o}{=} \PY{n}{maj\PYZus{}count}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{maj\PYZus{}count}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}maj\PYZus{}count.head(10)}
+\end{Verbatim}
+
+
+    \section{USGS gives the following descriptions for magnitude
+ranges:}\label{usgs-gives-the-following-descriptions-for-magnitude-ranges}
+
+ \textbf{5.0-5.9}: Moderate \textbf{6.0-6.9}: Strong \textbf{7.0-7.9}:
+Major \textbf{8.0 and higher}: Great 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{c+c1}{\PYZsh{}between\PYZus{}8\PYZus{}9.head()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{c+c1}{\PYZsh{} Aggregate by count and average time difference}
+         \PY{n}{time\PYZus{}diff\PYZus{}8\PYZus{}9} \PY{o}{=} \PY{n}{between\PYZus{}8\PYZus{}9}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{origin}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg\PYZus{}time\PYZus{}diff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{time\PYZus{}diff\PYZus{}8\PYZus{}9} \PY{o}{=} \PY{n}{time\PYZus{}diff\PYZus{}8\PYZus{}9}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/andrewmarsee/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:2: FutureWarning: using a dict on a Series for aggregation
+is deprecated and will be removed in a future version
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{c+c1}{\PYZsh{}time\PYZus{}diff\PYZus{}8\PYZus{}9.info()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{time\PYZus{}diff\PYZus{}8\PYZus{}9}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{time\PYZus{}diff\PYZus{}8\PYZus{}9}\PY{o}{.}\PY{n}{avg\PYZus{}time\PYZus{}diff}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{days} \PY{o}{/} \PY{l+m+mi}{365}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{time\PYZus{}diff\PYZus{}8\PYZus{}9}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}99}]:}                country  count             avg\_time\_diff  years
+         3             Colombia      2        3420 days 14:51:00   9.37
+         8               Mexico      2        3672 days 02:18:00  10.06
+         11            Pakistan      2        3834 days 00:24:00  10.50
+         6            Indonesia      7        4585 days 15:39:50  12.56
+         13                Peru      4        4970 days 16:39:40  13.62
+         7                Japan      8 5204 days 03:28:34.285714  14.26
+         14         Philippines      4        7062 days 01:17:40  19.35
+         1                Chile      6        7563 days 01:10:48  20.72
+         15  Russian Federation      4        8725 days 07:07:00  23.90
+         12    Papua New Guinea      2       10717 days 22:43:00  29.36
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{time\PYZus{}diff\PYZus{}8\PYZus{}9}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Years Between}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Time Between and Count of Deadly Earthquakes Above Magnitude 8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}plt.ylabel(\PYZsq{}Mean Time Between Earthquakes (Years)\PYZsq{})}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Colombia had the shortest amount of time on average between
+great earthquakes, but they only had two of them. They were unfortunate
+that they happened relatively close
+together}\label{colombia-had-the-shortest-amount-of-time-on-average-between-great-earthquakes-but-they-only-had-two-of-them.-they-were-unfortunate-that-they-happened-relatively-close-together}
+
+\subsection{We have to go to Peru to find a little bit better sample
+size. They had 4 such earthquakes and they occurred roughly every 14
+years}\label{we-have-to-go-to-peru-to-find-a-little-bit-better-sample-size.-they-had-4-such-earthquakes-and-they-occurred-roughly-every-14-years}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{between\PYZus{}7\PYZus{}8} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{]}
+          \PY{n}{between\PYZus{}7\PYZus{}8} \PY{o}{=} \PY{n}{between\PYZus{}7\PYZus{}8}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{between\PYZus{}7\PYZus{}8}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{8}\PY{p}{]}
+          \PY{n}{between\PYZus{}7\PYZus{}8}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}101}]:} (342, 14)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{c+c1}{\PYZsh{} Aggregate by count and average time difference}
+          \PY{n}{time\PYZus{}diff\PYZus{}7\PYZus{}8} \PY{o}{=} \PY{n}{between\PYZus{}7\PYZus{}8}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{origin}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg\PYZus{}time\PYZus{}diff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{time\PYZus{}diff\PYZus{}7\PYZus{}8} \PY{o}{=} \PY{n}{time\PYZus{}diff\PYZus{}7\PYZus{}8}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/andrewmarsee/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:2: FutureWarning: using a dict on a Series for aggregation
+is deprecated and will be removed in a future version
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{time\PYZus{}diff\PYZus{}7\PYZus{}8}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{time\PYZus{}diff\PYZus{}7\PYZus{}8}\PY{o}{.}\PY{n}{avg\PYZus{}time\PYZus{}diff}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{days} \PY{o}{/} \PY{l+m+mi}{365}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}time\PYZus{}diff\PYZus{}7\PYZus{}8.sort\PYZus{}values(by=\PYZsq{}years\PYZsq{}, ascending=True).head(20)}
+\end{Verbatim}
+
+
+    \subsection{Plotting the Top 10 countries with the shortest time between
+major
+earthquakes}\label{plotting-the-top-10-countries-with-the-shortest-time-between-major-earthquakes}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{time\PYZus{}diff\PYZus{}7\PYZus{}8}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Years Between}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Time Between and Count of Deadly Earthquakes Ranging from Magnitude 7 to 7.9}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}plt.ylabel(\PYZsq{}Mean Time Between Earthquakes (Years)\PYZsq{})}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Chile had the shortest amount of time between major
+earthquakes, although it didn't have the highest number of such
+quakes}\label{chile-had-the-shortest-amount-of-time-between-major-earthquakes-although-it-didnt-have-the-highest-number-of-such-quakes}
+
+\section{That distinction belonged to Indonesia and
+Japan}\label{that-distinction-belonged-to-indonesia-and-japan}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{between\PYZus{}6\PYZus{}7} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{clean\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{]}
+          \PY{n}{between\PYZus{}6\PYZus{}7} \PY{o}{=} \PY{n}{between\PYZus{}6\PYZus{}7}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{between\PYZus{}6\PYZus{}7}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magnitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{7}\PY{p}{]}
+          \PY{n}{between\PYZus{}6\PYZus{}7}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}105}]:} (511, 14)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{c+c1}{\PYZsh{} Aggregate by count and average time difference}
+          \PY{n}{time\PYZus{}diff\PYZus{}6\PYZus{}7} \PY{o}{=} \PY{n}{between\PYZus{}6\PYZus{}7}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{origin}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg\PYZus{}time\PYZus{}diff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{time\PYZus{}diff\PYZus{}6\PYZus{}7} \PY{o}{=} \PY{n}{time\PYZus{}diff\PYZus{}6\PYZus{}7}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/andrewmarsee/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:2: FutureWarning: using a dict on a Series for aggregation
+is deprecated and will be removed in a future version
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{c+c1}{\PYZsh{} Converting the time delta values to Years}
+          \PY{n}{time\PYZus{}diff\PYZus{}6\PYZus{}7}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{time\PYZus{}diff\PYZus{}6\PYZus{}7}\PY{o}{.}\PY{n}{avg\PYZus{}time\PYZus{}diff}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{days} \PY{o}{/} \PY{l+m+mi}{365}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}time\PYZus{}diff\PYZus{}6\PYZus{}7.sort\PYZus{}values(by=\PYZsq{}years\PYZsq{}, ascending=True).head(20)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{time\PYZus{}diff\PYZus{}6\PYZus{}7}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Time Between Deadly Earthquakes Ranging from Magnitude 6 to 6.9}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Time Between Earthquakes (Years)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{China has the shortest time between strong
+earthquakes}\label{china-has-the-shortest-time-between-strong-earthquakes}
+
+\begin{verbatim}
+<li>China is a very large country, so there is a large area that will be unaffected by earthquakes</li>
+<li>Indonesia is much smaller and has strong earthquakes almost as frequently</li>
+<ul>
+    <li>This is a country to avoid if you don't want to experience earthquakes</li>
+</ul>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{country\PYZus{}area\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/area\PYZus{}sq\PYZus{}km.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{country\PYZus{}area\PYZus{}df} \PY{o}{=} \PY{n}{country\PYZus{}area\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}
+          \PY{n}{country\PYZus{}area\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{country\PYZus{}area\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{252}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venezuela}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{country\PYZus{}area\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{110}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iran}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{country\PYZus{}area\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{120}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kyrgyzstan}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{country\PYZus{}area\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}109}]:}        country       area
+          0        Aruba      180.0
+          1  Afghanistan   652860.0
+          2       Angola  1246700.0
+          3      Albania    27400.0
+          4      Andorra      470.0
+\end{Verbatim}
+            
+    \subsection{Merge together and find number of deadly earthquakes per
+decade per 1,000,00 sq.
+km}\label{merge-together-and-find-number-of-deadly-earthquakes-per-decade-per-100000-sq.-km}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{merged\PYZus{}df} \PY{o}{=} \PY{n}{eq\PYZus{}count}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{country\PYZus{}area\PYZus{}df}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Adding in missing data}
+          \PY{n}{merged\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{36197} \PY{c+c1}{\PYZsh{} Taiwan}
+          \PY{n}{merged\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{676578} \PY{c+c1}{\PYZsh{} Burma (Myanmar)}
+          \PY{n}{merged\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2345409} \PY{c+c1}{\PYZsh{} Democratic Republic of the Congo}
+          \PY{n}{merged\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}110}]:}      country  count       area
+          0      China    166  9388211.0
+          1  Indonesia     96  1811570.0
+          2     Turkey     95   769630.0
+          3       Iran     91  1628760.0
+          4      Japan     82   364560.0
+          5       Peru     54  1280000.0
+          6     Taiwan     47    36197.0
+          7     Mexico     46  1943950.0
+          8      Chile     44   743532.0
+          9     Greece     44   128900.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{total\PYZus{}years} \PY{o}{=} \PY{l+m+mi}{111}
+          \PY{n}{decades} \PY{o}{=} \PY{n}{total\PYZus{}years} \PY{o}{/} \PY{l+m+mi}{10}
+          \PY{n}{area\PYZus{}unit} \PY{o}{=} \PY{l+m+mi}{1000000} \PY{c+c1}{\PYZsh{} Earthquakes per 1,000,000 sq km}
+          \PY{n}{standard\PYZus{}df} \PY{o}{=} \PY{n}{merged\PYZus{}df}
+          \PY{n}{standard\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{earthquake\PYZus{}density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{standard\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{total\PYZus{}years} \PY{o}{/} \PY{p}{(}\PY{n}{standard\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{area\PYZus{}unit}\PY{p}{)}
+          \PY{n}{standard\PYZus{}df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{earthquake\PYZus{}density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Number of earthquakes per year per 1,000,000 sq km (about the size of Ethiopia, a little bigger than Texas)}
+          \PY{c+c1}{\PYZsh{} or number of earthquakes per decade per 100,000 sq km (About the size of Kentucky)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}111}]:}         country  count      area  earthquake\_density
+          6        Taiwan     47   36197.0           11.697749
+          78        Samoa      1    2830.0            3.183395
+          9        Greece     44  128900.0            3.075224
+          32  El Salvador      7   20720.0            3.043584
+          57       Cyprus      3    9240.0            2.925003
+          33      Albania      7   27400.0            2.301572
+          4         Japan     82  364560.0            2.026385
+          26   Costa Rica     10   51060.0            1.764397
+          58      Jamaica      2   10830.0            1.663714
+          65      Vanuatu      2   12190.0            1.478098
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{standard\PYZus{}df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{earthquake\PYZus{}density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Least earthquake dense countries}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}112}]:}                 country  count        area  earthquake\_density
+          86               Brazil      1   8358140.0            0.001078
+          56               Canada      3   9093510.0            0.002972
+          52            Australia      3   7682300.0            0.003518
+          76                Sudan      1   2376000.0            0.003792
+          106            Mongolia      1   1553560.0            0.005799
+          22   Russian Federation     13  16376870.0            0.007151
+          108          Mozambique      1    786380.0            0.011456
+          47           Kazakhstan      4   2699700.0            0.013348
+          73                Spain      1    500210.0            0.018010
+          66             Ethiopia      2   1000000.0            0.018018
+\end{Verbatim}
+            
+    \subsection{It looks like Brazil is the least Earthquake dense country
+on this list, with only 1 such earthquake over the whole
+timeframe}\label{it-looks-like-brazil-is-the-least-earthquake-dense-country-on-this-list-with-only-1-such-earthquake-over-the-whole-timeframe}
+
+    \section{USGS Map of seismic hazards}\label{usgs-map-of-seismic-hazards}
+
+ \#\# This map is provided by the USGS, but it gives an idea of places
+in America that experience the most seismic activity
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
